@@ -159,7 +159,8 @@ def generate(input):
     print("[3/6] Applying ModelSamplingSD3 on high-noise unet... ", end="", flush=True)
     t0 = time.time()
     shift = 5.0
-    unet_high_sd3 = ModelSamplingSD3.patch(unet_high_use, shift)[0]
+    sampler = ModelSamplingSD3()
+    unet_high_sd3 = sampler.patch(unet_high_use, shift)[0]
     print(f"done ({time.time()-t0:.1f}s)")
 
     # ── [4] KSamplerAdvanced — high-noise pass ─────────────────
