@@ -244,9 +244,6 @@ DEFAULT_NEGATIVE = (
     "杂乱的背景，三条腿，背景人很多，倒着走"
 )
 
-custom_css = ".gradio-container { font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif; }"
-
-
 def generate_ui(
     start_image,
     positive_prompt,
@@ -299,10 +296,6 @@ with gr.Blocks() as demo:
     gr.HTML("""
 <div style="width:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; margin:20px 0;">
     <h1 style="font-size:2.5em; margin-bottom:10px;">Wan2.2 Image-to-Video</h1>
-    <a href="https://huggingface.co/Comfy-Org/Wan_2.2_ComfyUI_Repackaged" target="_blank">
-        <img src="https://img.shields.io/badge/HuggingFace-Wan2.2-orange?logo=huggingface&logoColor=white"
-             style="height:20px;">
-    </a>
 </div>
 """)
 
@@ -372,4 +365,4 @@ with gr.Blocks() as demo:
         outputs=[download_video, output_video, used_seed],
     )
 
-demo.launch(theme=gr.themes.Soft(), css=custom_css, share=True, debug=True)
+demo.launch(theme=gr.themes.Monochrome(), share=True, debug=True)
