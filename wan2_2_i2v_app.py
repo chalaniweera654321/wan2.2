@@ -223,7 +223,58 @@ def generate(input):
         print(f"☁️  Copied to Google Drive: {drive_path}")
 
     print(f"✅ Total    : {time.time()-total_start:.1f}s")
+    print(f"✅ Total    : {time.time()-total_start:.1f}s")
     print("=" * 50 + "\n")
+
+    # ✅ ---- WAN 2.2 CLEANUP ----
+    try:
+        import torch, gc
+
+        # Move biggest tensors OFF GPU first
+        if isinstance(decoded_images, torch.Tensor):
+            decoded_images = decoded_images.detach().cpu()
+
+        if isinstance(frames_uint8, torch.Tensor):
+            frames_uint8 = frames_uint8.cpu()
+
+        if isinstance(latent, torch.Tensor):
+            latent = latent.cpu()
+        if isinstance(latent_mid, torch.Tensor):
+            latent_mid = latent_mid.cpu()
+        if isinstance(latent_final, torch.Tensor):
+            latent_final = latent_final.cpu()
+
+        # Delete ALL heavy stuff
+        del decoded_images
+        del frames_uint8
+        del latent
+        del latent_mid
+        del latent_final
+        del positive_cond
+        del negative_cond
+        del positive_cond_i2v
+        del negative_cond_i2v
+        del wan_out
+        del start_image_tensor
+        del unet_high_sd3
+
+        # (IMPORTANT for Wan) clear intermediate sampler refs
+        del sampler
+
+    except Exception as e:
+        print("Cleanup warning:", e)
+
+    # Force Python cleanup
+    gc.collect()
+
+    # Force CUDA cleanup
+    torch.cuda.empty_cache()
+    torch.cuda.ipc_collect()
+
+    # Optional extra (helps Wan sometimes)
+    torch.cuda.synchronize()
+
+    # ✅ ---- END CLEANUP ----
 
     return save_path, seed
 
