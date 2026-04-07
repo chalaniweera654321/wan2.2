@@ -140,7 +140,7 @@ def generate(input):
     print("[2/6] Preparing image-to-video latent... ", end="", flush=True)
     t0 = time.time()
     start_image_tensor = load_image_tensor(start_image_pil)
-    wan_out = WanImageToVideo.encode(
+    wan_out = WanImageToVideo.execute(
         positive=positive_cond,
         negative=negative_cond,
         vae=vae,
