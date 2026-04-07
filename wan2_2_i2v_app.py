@@ -147,6 +147,7 @@ def generate(input):
         width=width,
         height=height,
         length=length,
+        batch_size=1,
         start_image=start_image_tensor,
     )
     positive_cond_i2v = wan_out[0]
