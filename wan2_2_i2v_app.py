@@ -6,6 +6,10 @@ from PIL import Image
 import torchvision.io as tvio
 from nodes import NODE_CLASS_MAPPINGS
 
+from comfy_extras.nodes_wan import WanImageToVideo
+from comfy_extras.nodes_video import CreateVideo
+from comfy_extras.nodes_model_advanced import ModelSamplingSD3
+
 # ── Model Loading ──────────────────────────────────────────────
 print("\n" + "=" * 50)
 print("  Wan2.2 I2V Starting Up")
@@ -17,10 +21,10 @@ VAELoader             = NODE_CLASS_MAPPINGS["VAELoader"]()
 CLIPTextEncode        = NODE_CLASS_MAPPINGS["CLIPTextEncode"]()
 KSamplerAdvanced      = NODE_CLASS_MAPPINGS["KSamplerAdvanced"]()
 VAEDecode             = NODE_CLASS_MAPPINGS["VAEDecode"]()
-WanImageToVideo       = NODE_CLASS_MAPPINGS["WanImageToVideo"]()
+WanImageToVideo       = WanImageToVideo
 LoraLoaderModelOnly   = NODE_CLASS_MAPPINGS["LoraLoaderModelOnly"]()
-ModelSamplingSD3      = NODE_CLASS_MAPPINGS["ModelSamplingSD3"]()
-CreateVideo           = NODE_CLASS_MAPPINGS["CreateVideo"]()
+ModelSamplingSD3      = ModelSamplingSD3
+CreateVideo           = CreateVideo
 
 # ── Default model filenames (edit if your filenames differ) ────
 UNET_HIGH_NOISE  = "wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors"
