@@ -295,7 +295,7 @@ def generate_ui(
     return video_path, video_path, str(used_seed)
 
 
-with gr.Blocks(theme=gr.themes.Soft(), css=custom_css) as demo:
+with gr.Blocks() as demo:
     gr.HTML("""
 <div style="width:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; margin:20px 0;">
     <h1 style="font-size:2.5em; margin-bottom:10px;">Wan2.2 Image-to-Video</h1>
@@ -372,4 +372,4 @@ with gr.Blocks(theme=gr.themes.Soft(), css=custom_css) as demo:
         outputs=[download_video, output_video, used_seed],
     )
 
-demo.launch(share=True, debug=True)
+demo.launch(theme=gr.themes.Soft(), css=custom_css, share=True, debug=True)
